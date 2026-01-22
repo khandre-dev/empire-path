@@ -14,7 +14,7 @@ background: linear-gradient(#efe2c6, #c9b58c);
 color: #2b2a23;
 }
 
-/* ---------- INTRO DOOR ---------- */
+/* INTRO */
 #intro {
 min-height: 100vh;
 display: flex;
@@ -23,16 +23,17 @@ justify-content: center;
 background: radial-gradient(circle, #fff6dc, #d6c39a);
 }
 
-#introDoor {
-padding: 2rem 3rem;
-border-radius: 40px;
-background: linear-gradient(#e9d18b, #c9a24e);
-font-size: 1.2rem;
+#intro button {
+padding: 1.2rem 2.5rem;
+font-size: 1.1rem;
 letter-spacing: 0.15em;
+border-radius: 30px;
+border: none;
+background: #d6b46a;
 cursor: pointer;
 }
 
-/* ---------- PATH ---------- */
+/* PATH */
 #path {
 display: none;
 padding: 4rem 1.5rem 6rem;
@@ -40,20 +41,15 @@ padding: 4rem 1.5rem 6rem;
 
 .door {
 max-width: 360px;
-margin: 4rem auto;
+margin: 3.5rem auto;
 padding: 2rem;
 text-align: center;
-background: rgba(255,255,255,0.6);
+background: rgba(255,255,255,0.7);
 border-radius: 20px;
 cursor: pointer;
-transition: transform 0.4s ease;
 }
 
-.door:hover {
-transform: scale(1.04);
-}
-
-/* ---------- SECTIONS ---------- */
+/* SECTION */
 .section {
 display: none;
 max-width: 720px;
@@ -62,7 +58,7 @@ padding: 3rem 1.5rem 6rem;
 }
 
 .box {
-background: rgba(255,255,255,0.85);
+background: rgba(255,255,255,0.9);
 border-radius: 22px;
 padding: 2.5rem;
 }
@@ -76,17 +72,11 @@ margin-bottom: 2rem;
 button {
 background: none;
 border: none;
-font-size: 0.9rem;
-letter-spacing: 0.12em;
 cursor: pointer;
+letter-spacing: 0.1em;
 }
 
-h1 {
-text-align: center;
-margin-bottom: 1.5rem;
-}
-
-/* ---------- FADE + GLOW ---------- */
+/* FADE + GLOW */
 .fade p {
 opacity: 0;
 transform: translateY(12px);
@@ -121,7 +111,7 @@ background: transparent;
 
 <!-- INTRO -->
 <div id="intro">
-<div id="introDoor" onclick="enter()">ENTER THE CULINARY PATH</div>
+<button onclick="enter()">ENTER THE CULINARY PATH</button>
 </div>
 
 <!-- PATH -->
@@ -142,6 +132,7 @@ document.getElementById("path").style.display = "block";
 
 function openSection(id) {
 document.getElementById("path").style.display = "none";
+document.querySelectorAll(".section").forEach(s => s.style.display = "none");
 document.getElementById(id).style.display = "block";
 setLanguage(id, "bg");
 }
@@ -151,23 +142,23 @@ document.querySelectorAll(".section").forEach(s => s.style.display = "none");
 document.getElementById("path").style.display = "block";
 }
 
-function revealParagraphs(container) {
+function reveal(container) {
 const ps = container.querySelectorAll("p");
 ps.forEach((p, i) => {
 setTimeout(() => {
 p.classList.add("visible");
 if (i === 0) {
 p.classList.add("first-glow");
-setTimeout(() => p.classList.add("glow-done"), 1600);
+setTimeout(() => p.classList.add("glow-done"), 1500);
 }
 }, i * 700);
 });
 }
 
 function setLanguage(id, lang) {
-const section = document.getElementById(id);
-const bg = section.querySelector(".bg");
-const en = section.querySelector(".en");
+const sec = document.getElementById(id);
+const bg = sec.querySelector(".bg");
+const en = sec.querySelector(".en");
 
 bg.style.display = "none";
 en.style.display = "none";
@@ -177,43 +168,128 @@ en.querySelectorAll("p").forEach(p => p.className = "");
 
 const active = lang === "bg" ? bg : en;
 active.style.display = "block";
-revealParagraphs(active);
+reveal(active);
 
-section.querySelector(".title-bg").style.display = lang === "bg" ? "block" : "none";
-section.querySelector(".title-en").style.display = lang === "en" ? "block" : "none";
+sec.querySelector(".title-bg").style.display = lang === "bg" ? "block" : "none";
+sec.querySelector(".title-en").style.display = lang === "en" ? "block" : "none";
 }
 </script>
 
-<!-- TEMPLATE SECTION (Visigoth example) -->
+<!-- SECTIONS -->
+
 <div id="visigoth" class="section">
 <div class="box">
 <div class="controls">
 <button onclick="back()">← Back</button>
-<div>
-<button onclick="setLanguage('visigoth','bg')">BG</button> |
-<button onclick="setLanguage('visigoth','en')">EN</button>
+<div><button onclick="setLanguage('visigoth','bg')">BG</button> | <button onclick="setLanguage('visigoth','en')">EN</button></div>
 </div>
-</div>
-
 <h1 class="title-bg">Вестготска империя</h1>
 <h1 class="title-en" style="display:none;">Visigothic Kingdom</h1>
-
 <div class="bg fade">
 <p>Когато властта на Рим започва да се разпада, вестготите поемат по пътищата на Запада.</p>
-<p>Тяхното кралство съчетава сурови германски обичаи с римско наследство.</p>
-<p>В кухнята им черният пипер, цвеклото и гъбите създавали земни и дълбоки вкусове.</p>
+<p>Тяхната кухня съчетава земни вкусове и простота.</p>
 </div>
-
 <div class="en fade">
 <p>As Roman authority weakened, the Visigoths moved westward.</p>
-<p>Their kingdom blended Germanic customs with Roman legacy.</p>
-<p>Black pepper, beets, and mushrooms shaped a cuisine rooted in earth and forest.</p>
+<p>Their cuisine was grounded and deeply connected to the land.</p>
 </div>
 </div>
 </div>
 
-<!-- Repeat same structure for other empires -->
-<!-- (You already have the text – copy-paste per section) -->
+<div id="rome" class="section">
+<div class="box">
+<div class="controls">
+<button onclick="back()">← Back</button>
+<div><button onclick="setLanguage('rome','bg')">BG</button> | <button onclick="setLanguage('rome','en')">EN</button></div>
+</div>
+<h1 class="title-bg">Римска империя</h1>
+<h1 class="title-en" style="display:none;">Roman Empire</h1>
+<div class="bg fade">
+<p>Рим превръща храната в символ на власт и разкош.</p>
+<p>Подправките пътуват заедно с легионите.</p>
+</div>
+<div class="en fade">
+<p>Rome turned food into a symbol of power and luxury.</p>
+<p>Spices traveled alongside its legions.</p>
+</div>
+</div>
+</div>
+
+<div id="carthage" class="section">
+<div class="box">
+<div class="controls">
+<button onclick="back()">← Back</button>
+<div><button onclick="setLanguage('carthage','bg')">BG</button> | <button onclick="setLanguage('carthage','en')">EN</button></div>
+</div>
+<h1 class="title-bg">Картаген</h1>
+<h1 class="title-en" style="display:none;">Carthage</h1>
+<div class="bg fade">
+<p>Картаген бил кръстопът на подправки и морски пътища.</p>
+<p>Всеки вкус разказвал за пътешествие.</p>
+</div>
+<div class="en fade">
+<p>Carthage was a crossroads of spices and sea routes.</p>
+<p>Every flavor told a story of travel.</p>
+</div>
+</div>
+</div>
+
+<div id="byzantine" class="section">
+<div class="box">
+<div class="controls">
+<button onclick="back()">← Back</button>
+<div><button onclick="setLanguage('byzantine','bg')">BG</button> | <button onclick="setLanguage('byzantine','en')">EN</button></div>
+</div>
+<h1 class="title-bg">Византийска империя</h1>
+<h1 class="title-en" style="display:none;">Byzantine Empire</h1>
+<div class="bg fade">
+<p>Византия съхранява римската традиция в кухнята.</p>
+<p>Храната била знак за култура и вяра.</p>
+</div>
+<div class="en fade">
+<p>Byzantium preserved Roman tradition through cuisine.</p>
+<p>Food became a sign of culture and faith.</p>
+</div>
+</div>
+</div>
+
+<div id="ottoman" class="section">
+<div class="box">
+<div class="controls">
+<button onclick="back()">← Back</button>
+<div><button onclick="setLanguage('ottoman','bg')">BG</button> | <button onclick="setLanguage('ottoman','en')">EN</button></div>
+</div>
+<h1 class="title-bg">Османска империя</h1>
+<h1 class="title-en" style="display:none;">Ottoman Empire</h1>
+<div class="bg fade">
+<p>Османската кухня обединява Изтока и Запада.</p>
+<p>Ароматите се разстилат из целия двор.</p>
+</div>
+<div class="en fade">
+<p>Ottoman cuisine united East and West.</p>
+<p>Aromas filled the imperial court.</p>
+</div>
+</div>
+</div>
+
+<div id="bukhara" class="section">
+<div class="box">
+<div class="controls">
+<button onclick="back()">← Back</button>
+<div><button onclick="setLanguage('bukhara','bg')">BG</button> | <button onclick="setLanguage('bukhara','en')">EN</button></div>
+</div>
+<h1 class="title-bg">Емирство на Бухара</h1>
+<h1 class="title-en" style="display:none;">Emirate of Bukhara</h1>
+<div class="bg fade">
+<p>Бухара била тиха, но ароматна спирка по Пътя на коприната.</p>
+<p>Храната носела търпение и път.</p>
+</div>
+<div class="en fade">
+<p>Bukhara was a quiet, aromatic stop on the Silk Road.</p>
+<p>Its food carried patience and journey.</p>
+</div>
+</div>
+</div>
 
 </body>
 </html>
