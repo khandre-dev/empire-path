@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lost Empire Kingdoms</title>
+<meta name="robots" content="noindex, nofollow">
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+margin: 0;
+font-family: Georgia, serif;
+color: #f2efe9;
+background:
+radial-gradient(circle at top center,
+rgba(246,210,139,0.25),
+rgba(11,16,37,0.95) 70%
+),
+linear-gradient(to bottom, #1c2550, #0b1025);
+}
+
+/* INTRO DOORS */
+.intro-door {
+position: fixed;
+top: 0;
+width: 50%;
+height: 100%;
+z-index: 10;
+background: linear-gradient(180deg,
+rgba(255,230,180,0.15),
+rgba(30,40,80,0.95)
+);
+transition: transform 3s ease;
+}
+
+.left { left: 0; }
+.right { right: 0; }
+
+body.entered .left { transform: translateX(-100%); }
+body.entered .right { transform: translateX(100%); }
+
+#enterPrompt {
+position: fixed;
+inset: 0;
+display: flex;
+align-items: center;
+justify-content: center;
+letter-spacing: 0.3em;
+text-transform: uppercase;
+opacity: 0.8;
+z-index: 5;
+cursor: pointer;
+}
+
+/* PATH */
+#path {
+display: none;
+padding: 5rem 1.5rem 8rem;
+}
+
+.empire-door {
+position: relative;
+width: 100%;
+max-width: 320px;
+height: 90px;
+margin: 5rem auto;
+cursor: pointer;
+}
+
+.panel {
+position: absolute;
+top: 0;
+width: 50%;
+height: 100%;
+background: linear-gradient(
+180deg,
+rgba(255,220,160,0.18),
+rgba(30,40,80,0.9)
+);
+transition: transform 1.6s cubic-bezier(0.77,0,0.175,1);
+}
+
+.panel.left { left: 0; }
+.panel.right { right: 0; }
+
+.light {
+position: absolute;
+inset: 0;
+background: radial-gradient(circle,
+rgba(246,210,139,0.6),
+transparent 70%);
+opacity: 0;
+transition: opacity 1.2s ease;
+}
+
+.title {
+position: absolute;
+inset: 0;
+display: flex;
+align-items: center;
+justify-content: center;
+letter-spacing: 0.15em;
+z-index: 2;
+}
+
+.empire-door.open .panel.left { transform: translateX(-110%); }
+.empire-door.open .panel.right { transform: translateX(110%); }
+.empire-door.open .light { opacity: 1; }
+
+/* SECTIONS */
+.section {
+display: none;
+max-width: 640px;
+margin: auto;
+padding: 3rem 1.5rem 6rem;
+}
+
+.box {
+background: rgba(10,15,30,0.92);
+border-radius: 18px;
+padding: 2.5rem 2rem;
+}
+
+.controls {
+display: flex;
+justify-content: space-between;
+margin-bottom: 2rem;
+}
+
+button {
+background: none;
+border: none;
+color: #f6d28b;
+letter-spacing: 0.12em;
+}
+
+h1 {
+text-align: center;
+color: #f6d28b;
+letter-spacing: 0.14em;
+}
+
+p {
+line-height: 1.65;
+max-width: 38ch;
+margin: 1.2rem auto;
+}
+
+.en { display: none; }
+</style>
+</head>
+
+<body>
+
+<div class="intro-door left"></div>
+<div class="intro-door right"></div>
+<div id="enterPrompt" onclick="enter()">Tap to enter</div>
+
+<div id="path">
+<div class="empire-door" onclick="openDoor(event,'rome')">
+<div class="panel left"></div><div class="panel right"></div>
+<div class="light"></div><div class="title">Roman Empire</div>
+</div>
+
+<div class="empire-door" onclick="openDoor(event,'carthage')">
+<div class="panel left"></div><div class="panel right"></div>
+<div class="light"></div><div class="title">Carthage</div>
+</div>
+
+<div class="empire-door" onclick="openDoor(event,'visigoth')">
+<div class="panel left"></div><div class="panel right"></div>
+<div class="light"></div><div class="title">Visigothic Kingdom</div>
+</div>
+
+<div class="empire-door" onclick="openDoor(event,'byzantine')">
+<div class="panel left"></div><div class="panel right"></div>
+<div class="light"></div><div class="title">Byzantine Empire</div>
+</div>
+
+<div class="empire-door" onclick="openDoor(event,'ottoman')">
+<div class="panel left"></div><div class="panel right"></div>
+<div class="light"></div><div class="title">Ottoman Empire</div>
+</div>
+
+<div class="empire-door" onclick="openDoor(event,'bukhara')">
+<div class="panel left"></div><div class="panel right"></div>
+<div class="light"></div><div class="title">Emirate of Bukhara</div>
+</div>
+</div>
+
+<!-- TEMPLATE SECTION (reused logic) -->
+<script>
+function enter(){
+document.body.classList.add("entered");
+document.getElementById("enterPrompt").style.display="none";
+setTimeout(()=>document.getElementById("path").style.display="block",3000);
+}
+function openDoor(e,id){
+e.currentTarget.classList.add("open");
+setTimeout(()=>{
+document.getElementById("path").style.display="none";
+document.getElementById(id).style.display="block";
+},1700);
+}
+function back(){
+document.querySelectorAll(".section").forEach(s=>s.style.display="none");
+document.getElementById("path").style.display="block";
+document.querySelectorAll(".empire-door").forEach(d=>d.classList.remove("open"));
+}
+function lang(id,l){
+document.querySelector(`#${id} .bg`).style.display=l==="bg"?"block":"none";
+document.querySelector(`#${id} .en`).style.display=l==="en"?"block":"none";
+}
+</script>
+
+<!-- SECTIONS -->
+<!-- Roman -->
+<div id="rome" class="section">
+<div class="box">
+<div class="controls"><button onclick="back()">← Back</button>
+<div><button onclick="lang('rome','bg')">BG</button><button onclick="lang('rome','en')">EN</button></div></div>
+<h1>Roman Empire</h1>
+<div class="bg"><p>След победата над Картаген Рим се превръща в най-могъщата сила в Европа.</p>
+<p>Докато войниците живеели скромно, елитът се наслаждавал на подправки, риба и зехтин.</p></div>
+<div class="en"><p>After defeating Carthage, Rome became Europe’s dominant power.</p>
+<p>While soldiers lived simply, the elite enjoyed spices, fish, and olive oil.</p></div>
+</div></div>
+
+<!-- Repeat structure for others -->
+<!-- Carthage -->
+<div id="carthage" class="section"><div class="box">
+<div class="controls"><button onclick="back()">← Back</button>
+<div><button onclick="lang('carthage','bg')">BG</button><button onclick="lang('carthage','en')">EN</button></div></div>
+<h1>Carthage</h1>
+<div class="bg"><p>Една от най-богатите търговски сили в Средиземноморието.</p>
+<p>Известна с редки подправки и обширни търговски мрежи.</p></div>
+<div class="en"><p>One of the richest trading powers of the Mediterranean.</p>
+<p>Known for spices and vast commercial networks.</p></div>
+</div></div>
+
+<!-- Visigoth -->
+<div id="visigoth" class="section"><div class="box">
+<div class="controls"><button onclick="back()">← Back</button>
+<div><button onclick="lang('visigoth','bg')">BG</button><button onclick="lang('visigoth','en')">EN</button></div></div>
+<h1>Visigothic Kingdom</h1>
+<div class="bg"><p>Германско кралство, възникнало върху руините на Рим.</p>
+<p>Съчетава римска и варварска култура.</p></div>
+<div class="en"><p>A Germanic kingdom born from Rome’s decline.</p>
+<p>Blending Roman and barbarian traditions.</p></div>
+</div></div>
+
+<!-- Byzantine -->
+<div id="byzantine" class="section"><div class="box">
+<div class="controls"><button onclick="back()">← Back</button>
+<div><button onclick="lang('byzantine','bg')">BG</button><button onclick="lang('byzantine','en')">EN</button></div></div>
+<h1>Byzantine Empire</h1>
+<div class="bg"><p>Източният наследник на Рим до 1453 г.</p>
+<p>Център на търговия, интриги и разкош.</p></div>
+<div class="en"><p>The eastern continuation of Rome until 1453.</p>
+<p>A center of trade, intrigue, and luxury.</p></div>
+</div></div>
+
+<!-- Ottoman -->
+<div id="ottoman" class="section"><div class="box">
+<div class="controls"><button onclick="back()">← Back</button>
+<div><button onclick="lang('ottoman','bg')">BG</button><button onclick="lang('ottoman','en')">EN</button></div></div>
+<h1>Ottoman Empire</h1>
+<div class="bg"><p>Малък бейлик, превърнал се в световна сила.</p>
+<p>Контролира ключови търговски пътища.</p></div>
+<div class="en"><p>A small beylik that became a global empire.</p>
+<p>Controlling key trade routes.</p></div>
+</div></div>
+
+<!-- Bukhara -->
+<div id="bukhara" class="section"><div class="box">
+<div class="controls"><button onclick="back()">← Back</button>
+<div><button onclick="lang('bukhara','bg')">BG</button><button onclick="lang('bukhara','en')">EN</button></div></div>
+<h1>Emirate of Bukhara</h1>
+<div class="bg"><p>Просперитетно емирство в Централна Азия.</p>
+<p>Търговски кръстопът между Изтока и Запада.</p></div>
+<div class="en"><p>A prosperous emirate in Central Asia.</p>
+<p>A crossroads between East and West.</p></div>
+</div></div>
+
+</body>
+</html>
