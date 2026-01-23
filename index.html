@@ -62,21 +62,10 @@ body, html {
   overflow-x: hidden;
 }
 #path {
-  display: none;              /* 👈 move it here */
+  display: none;
   min-height: 100vh;
   padding: 6rem 1.5rem 8rem;
-
-  background-image:
-    radial-gradient(
-      circle at center,
-      rgba(255, 245, 220, 0.85),
-      rgba(200, 175, 120, 0.95)
-    ),
-    url("path-bg.jpg");
-
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  background: red !important;
 }
 
 .door {
@@ -352,6 +341,7 @@ sec.querySelector(".title-en").style.display = lang === "en" ? "block" : "none";
 
 </body>
 </html>
+
 
 
 
