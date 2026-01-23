@@ -1,12 +1,43 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Culinary Path of Empires</title>
-<meta name="robots" content="noindex, nofollow">
+<!-- INTRO VIDEO -->
+<div id="intro">
+  <video id="introVideo" autoplay muted playsinline>
+    <source src="doors.mp4" type="video/mp4">
+  </video>
 
-<style>
+  <button id="enterBtn" onclick="enter()">Enter the Path</button>
+</div>
+
+<!-- MENU CONTENT -->
+<div id="menu" style="display:none;">
+  <!-- your existing path + empires go here -->
+</div>
+
+<style> #intro {
+  position: relative;
+  min-height: 100vh;
+  background: black;
+}
+
+#intro video {
+  width: 100%;
+  height: 100vh;
+  object-fit: cover;
+}
+
+#enterBtn {
+  position: absolute;
+  bottom: 15%;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 1rem 2.5rem;
+  background: rgba(255, 230, 170, 0.85);
+  border: none;
+  border-radius: 30px;
+  font-size: 1.1rem;
+  letter-spacing: 0.15em;
+  cursor: pointer;
+}
+
 body {
 margin: 0;
 font-family: Georgia, serif;
@@ -293,3 +324,4 @@ sec.querySelector(".title-en").style.display = lang === "en" ? "block" : "none";
 
 </body>
 </html>
+
