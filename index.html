@@ -61,7 +61,22 @@ body, html {
   padding: 0;
   overflow-x: hidden;
 }
+#path {
+  min-height: 100vh;
+  padding: 6rem 1.5rem 8rem;
 
+  background-image:
+    radial-gradient(
+      circle at center,
+      rgba(255, 245, 220, 0.85),
+      rgba(200, 175, 120, 0.95)
+    ),
+    url("path-bg.jpg");
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
 /* PATH */
 #path {
 display: none;
@@ -69,13 +84,22 @@ padding: 4rem 1.5rem 6rem;
 }
 
 .door {
-max-width: 360px;
-margin: 3.5rem auto;
-padding: 2rem;
-text-align: center;
-background: rgba(255,255,255,0.7);
-border-radius: 20px;
-cursor: pointer;
+  max-width: 360px;
+  margin: 3rem auto;
+  padding: 1.8rem;
+
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(4px);
+
+  border-radius: 20px;
+  cursor: pointer;
+
+  transition: transform 0.4s ease, background 0.4s ease;
+}
+
+.door:hover {
+  transform: translateY(-4px);
+  background: rgba(255, 255, 255, 0.75);
 }
 
 /* SECTION */
@@ -332,6 +356,7 @@ sec.querySelector(".title-en").style.display = lang === "en" ? "block" : "none";
 
 </body>
 </html>
+
 
 
 
