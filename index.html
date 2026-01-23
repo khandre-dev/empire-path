@@ -1,10 +1,13 @@
 <!-- INTRO VIDEO -->
 <div id="intro">
-  <video id="introVideo" autoplay muted playsinline>
+  <video id="introVideo" muted playsinline preload="auto" poster="door-closed.jpg">
     <source src="doors.mp4" type="video/mp4">
   </video>
 
-  <button id="enterBtn" onclick="enter()">Enter the Path</button>
+  <div class="intro-overlay">
+    <button id="enterBtn" onclick="enter()">ENTER THE PATH</button>
+    <p class="intro-sub">A journey through empires, told through taste.</p>
+  </div>
 </div>
 
 <!-- MENU CONTENT -->
@@ -170,10 +173,25 @@ background: transparent;
 
 <script>
 function enter() {
-document.getElementById("intro").style.display = "none";
-document.getElementById("path").style.display = "block";
-}
+  const video = document.getElementById("introVideo");
+  const overlay = document.querySelector(".intro-overlay");
+  const intro = document.getElementById("intro");
 
+  overlay.style.opacity = "0";
+  overlay.style.transition = "opacity 0.6s ease";
+
+  video.play();
+
+  video.onended = () => {
+    intro.style.opacity = "0";
+    intro.style.transition = "opacity 1s ease";
+
+    setTimeout(() => {
+      intro.style.display = "none";
+      document.getElementById("path").style.display = "block";
+    }, 1000);
+  };
+}
 function openSection(id) {
 document.getElementById("path").style.display = "none";
 document.querySelectorAll(".section").forEach(s => s.style.display = "none");
@@ -337,6 +355,7 @@ sec.querySelector(".title-en").style.display = lang === "en" ? "block" : "none";
 
 </body>
 </html>
+
 
 
 
