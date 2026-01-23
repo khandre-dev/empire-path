@@ -62,6 +62,7 @@ body, html {
   overflow-x: hidden;
 }
 #path {
+  display: none;              /* 👈 move it here */
   min-height: 100vh;
   padding: 6rem 1.5rem 8rem;
 
@@ -76,11 +77,6 @@ body, html {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-}
-/* PATH */
-#path {
-display: none;
-padding: 4rem 1.5rem 6rem;
 }
 
 .door {
@@ -356,6 +352,7 @@ sec.querySelector(".title-en").style.display = lang === "en" ? "block" : "none";
 
 </body>
 </html>
+
 
 
 
